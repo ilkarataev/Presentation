@@ -20,12 +20,10 @@ var vids = document.getElementsByTagName('video');
 var divload = document.getElementById("load");
 for (var i = 1; i < vids.length; i++) {
 vids[i].pause();
-
 }
 
 addEventListener("keydown", moveRect);
-//video2.addEventListener('ended', myFunction2, false);
-//video1.addEventListener("onclick", moveRect);
+//video3.addEventListener("ended", function(){video1.play()});
 
 function moveRect(e){   
      
@@ -37,15 +35,33 @@ function moveRect(e){
 
          
         case 37:  // если нажата клавиша влево
-                for (var i = 1; i < vids.length; i++) {
+                var callslidebackfull = backslidefull();
+                break;
+                /*for (var i = 1; i < vids.length; i++) {
                        if(vids[i].getAttribute('class') == 'active'){
                                 
                                 vids[i].removeAttribute('loop');
                                 divload.setAttribute('class', '');
+                                if(i>=14){
+                                  backSlide();
+                              }else{
                                 vids[i].addEventListener('ended', backSlide,false);
+                              }
                                       function backSlide() {
-                                                var vid_back =vids[i].getAttribute('id')+'_back';
-                                                var back = document.getElementById(vid_back);                                  
+                                                if (i > 12){
+                                                     if (i == 3 || i == 14){
+                                                              var vid_back =vids[3].getAttribute('id');
+                                                              var back = document.getElementById(vid_back)
+                                                              vids[i].removeAttribute('loop');
+                                                      }else{
+                                                              var vid_back =vids[i-2].getAttribute('id');
+                                                              var back = document.getElementById(vid_back);
+                                                      }
+                                                }else{
+                                                    var vid_back =vids[i].getAttribute('id')+'_back';
+                                                    var back = document.getElementById(vid_back);
+                                                }                                             
+                                                                                  
                                                 back.play();
                                                 back.setAttribute('class', 'active');  
                                                 vids[i].setAttribute('class', 'hidden');
@@ -57,8 +73,9 @@ function moveRect(e){
                                       break;
                         }
                 }
-                break;
-        case 39:  // если нажата клавиша вправо        
+                break;*/
+        case 39:  // если нажата клавиша вправо  
+
         for (var i = 0; i < vids.length; i++) {
                 
                if(vids[i].getAttribute('class') == 'active'){
@@ -80,25 +97,11 @@ function moveRect(e){
                                 }
                                 z=i+1
 
-                       
-                        /*var currentvideo1 = vids[z].getAttribute('id')
-                        var currentvideo = document.getElementById(currentvideo1);
-                        vids[z].play();
-                        vids[z].setAttribute('class', 'active');  
-                        vids[i].setAttribute('class', 'hidden');
-                        if (z &1 ){*/
-                         
-                          //var obj= {};
+                      
                           var qqq = 'myFunction'+z +'()';
                           //obj=eval(qqq);
                           console.log(qqq);
-                          eval(qqq);
-                         // vids[i].setAttribute('class','');
-
-                         // alert(typeof obj);
-                         //vids[z].addEventListener('ended', obj, false);   
-                      /*  }*/
-                        //video.addEventListener('ended', myFunction1, false);  
+                          eval(qqq);                        
                         break;
                 }
         }   
@@ -115,6 +118,72 @@ window.onload=function()
   //vids[0].setAttribute('onclick', 'moveRect()');*/
   
 }
+
+
+function backSlide(i) {
+  if (i > 12){
+               if (i == 3 || i==14 ){
+                          var vid_back =vids[3].getAttribute('id'+'_back');
+                          var back = document.getElementById(vid_back)
+                          vids[3].removeAttribute('loop');              
+              }else{
+                          var vid_back =vids[i].getAttribute('id');
+                          var back = document.getElementById(vid_back);
+              }
+                                                      
+ }else{
+  var vid_back =vids[i].getAttribute('id')+'_back';
+  var back = document.getElementById(vid_back);
+  }                                                                                
+
+  back.play();
+  back.setAttribute('class', 'active');  
+  vids[i].setAttribute('class', 'hidden');
+  vids[i-1].load();
+  vids[i-1].pause();
+  divload.setAttribute('class', 'hidden');
+  vids[i].removeEventListener('ended',function(){backSlide(i)},false);
+}
+function backslidefull(){
+  for (var i = 1; i < vids.length; i++) {
+                       if(vids[i].getAttribute('class') == 'active'){
+                                
+                               // vids[i].removeAttribute('loop');
+                                divload.setAttribute('class', '');                              
+                                vids[i].removeAttribute('loop');
+                                vids[i].addEventListener('ended',function(){backSlide(i)},false);
+                                return;
+                              }
+  }
+}
+                                     /*function backSlide1(i) {
+                                                if (i > 12){
+                                                     if (i == 3 || i ==14){
+                                                              var vid_back =vids[3].getAttribute('id');
+                                                              var back = document.getElementById(vid_back)
+                                                              vids[i].removeAttribute('loop');
+                                                      }else{
+                                                              var vid_back =vids[i-2].getAttribute('id');
+                                                              var back = document.getElementById(vid_back);
+                                                      }
+                                                }else{
+                                                    var vid_back =vids[i].getAttribute('id')+'_back';
+                                                    var back = document.getElementById(vid_back);
+                                                }                                             
+                                                                                  
+                                                back.play();
+                                                back.setAttribute('class', 'active');  
+                                                vids[i].setAttribute('class', 'hidden');
+                                                vids[i-1].load();
+                                                vids[i-1].pause();
+                                                divload.setAttribute('class', 'hidden');
+                                                vids[i].removeEventListener('ended', backSlide,false);
+                                      }
+                                      
+                        }*/
+                
+              
+
 function myFunction1() {   
   if(video1.getAttribute('class') == 'active'){
   video2.play();
@@ -132,7 +201,7 @@ function myFunction1() {
 }
 
 function myFunction2() {
-  video2.removeEventListener('ended', myFunction2, false); 
+  //video2.removeEventListener('ended', myFunction2, false); 
   video3.play();
   video3.setAttribute('class', 'active');
   video2.setAttribute('class', 'hidden');
@@ -167,7 +236,7 @@ function myFunction3_1() {
 }
 
 function myFunction4() {   
-  video4.removeEventListener('ended', myFunction4, false); 
+      video4.removeEventListener('ended', myFunction4, false); 
       video5.play();
       video5.setAttribute('class', 'active');
       video4.setAttribute('class', 'hidden');
@@ -188,7 +257,7 @@ function myFunction5() {
 }
 }
 function myFunction5_1() {   
-  video5.removeEventListener('ended', myFunction5_1, false); 
+  
   divload.setAttribute('class', 'hidden');
   video6.play();
   video6.setAttribute('class', 'active');
