@@ -23,7 +23,6 @@ vids[i].pause();
 }
 
 addEventListener("keydown", moveRect);
-//video3.addEventListener("ended", function(){video1.play()});
 
 function moveRect(e){   
      
@@ -55,34 +54,44 @@ var Controller = {
         if(vids[posittion].getAttribute('loop')){
           vids[posittion].removeAttribute('loop');
           divload.setAttribute('class', '');  
-          vids[posittion].addEventListener('ended', function(){Controller.glueSlide(posittion)}, false);  
+          vids[posittion].addEventListener('ended', Controller.glueSlide(posittion), false);  
         }else{
         var psnext=posittion+1;
         vids[psnext].play();
         vids[psnext].setAttribute('class', 'active');  
         vids[posittion].setAttribute('class', 'hidden');    
         vids[psnext].addEventListener('ended', function(){Controller.autoPlaySlide(psnext)}, false);
-        return;  
+        
         }
       }else{   
         vids[posittion].play();
         vids[posittion].setAttribute('class', 'active');  
-        vids[oldpos].setAttribute('class', 'hidden');
-        vids[posittion].addEventListener('ended', function(){Controller.autoPlaySlide(psnext,oldpos)}, false);  
+        if(oldpos =='undefined'){
+        return;
+        //vids[posittion].addEventListener('ended', function(){Controller.autoPlaySlide(psnext,oldpos)}, false); 
+      }vids[oldpos].setAttribute('class', 'hidden');
+         
       }
 },
  glueSlide: function(posittion){
-        var psnext=posittion+1;
-        vids[posittion].removeEventListener('ended', function(){Controller.glueSlide(posittion)}, false);
+        
+        var psnext=posittion+1;        
         divload.setAttribute('class', 'hidden');  
         vids[psnext].play();
         vids[psnext].setAttribute('class', 'active');  
         vids[posittion].setAttribute('class', 'hidden');    
        // Controller.autoPlaySlide(psnext);
+       //Незнаю как удалить ебаный листнер
         vids[psnext].addEventListener('ended', function(){Controller.autoPlaySlide(psnext)}, false); 
+
+       // vids[posittion].removeEventListener('ended', function(){Controller.glueSlide(posittion)}, false);
+
+        
 
 },
   autoPlaySlide: function(posittion,oldpos) {
+  vids[posittion].removeEventListener('ended', function(){Controller.glueSlide(posittion)}, false);
+
   var psnext=posittion+1;
   if(oldpos){
   vids[oldpos].removeEventListener('ended', Controller.autoPlaySlide(psnext,oldpos), false);  
@@ -93,7 +102,7 @@ var Controller = {
   vids[psnext].setAttribute('class', 'active');
   vids[posittion].setAttribute('class', 'hidden');
   divload.setAttribute('class', 'hidden'); 
-
+  
   },
   KeyNextSlide: function() {
     for (var i = 0; i < vids.length; i++) {                
