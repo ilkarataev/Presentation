@@ -1,0 +1,30 @@
+{
+  "name": "MSK_transport",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "latest",
+    "electron-packager": "latest"
+    
+  },
+  "scripts": {
+    "dev": "electron . --debug",
+    "start": "electron .",    
+    "build": "electron-packager . Msk --platform=win32 --arch=ia32  --app-version=0.1.0 --out=dist --ignore=dist --prune --overwrite to force --icon=./build/icon.ico"
+  },
+  
+  "win": {
+  "target": [
+    {
+      "target": "portable",
+      "arch": [
+        "x64",
+        "ia32"
+      ]
+    }
+  ]
+},
+  "author": "Bay Production",
+  "license": "MIT"
+}

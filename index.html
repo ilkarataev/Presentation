@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="shortcut icon" href="build/icon.ico" type="image/x-icon">
+        <style> 
+            .hidden {
+                position: absolute;
+                top: -10000px;
+                left: -10000px; 
+                }
+            .video_container {
+                position: relative;
+
+                }
+            video {
+                position: absolute;
+                max-width: 100%;
+                height: auto;
+
+                }
+            .video_container {
+                position: relative;
+
+                }
+            #load {
+                position: absolute;
+                z-index:1;
+                color: red;
+                
+
+                }
+        </style>           
+        
+   </head>
+    <body onkeypress="myFunction1();">
+        
+          <div class="video_container">
+            <div id="load" class="hidden" >
+            <p> Загрузка </p>
+        </div>
+          <video id='video1' width="100%" height="auto" autoplay="autoplay" muted loop preload="metadata" poster="1_videointroanim.mp4" onclick="myFunction1();"  src="1_videointroanim.mp4"  type="video/mp4" class='active' >   
+        </video>  
+        <video id='video2'  width="100%" height="auto" autoplay="autoplay"  preload="auto" class="hidden" src="2_videointroend.mp4"   type="video/mp4">     
+ 
+        </video>
+        <video id='video3' width="100%" height="auto" autoplay="autoplay" loop  preload="auto" class="hidden" onclick="myFunction3();" onkeydown="myFunction3();" src="3_video1animcycle.mp4"  type="video/mp4" allow="autoplay" >    
+        </video> 
+           
+ 
+        </video>  
+        <video id='video4' width="100%" height="auto" autoplay="autoplay"  preload="auto" class="hidden" src="./4_video1anim2.mp4"  type="video/mp4">                  
+                     
+        </video> 
+        <video id='video5' width="100%" height="auto" autoplay="autoplay" loop preload="auto" class="hidden" onclick="myFunction5();" onkeydown="myFunction3();" src="./5_video2animcycle.mp4"  type="video/mp4">        
+
+        </video> 
+        <video id='video6' width="100%" height="auto" autoplay="autoplay"  preload="auto" class="hidden" src="./6_video2animend.mp4"  type="video/mp4">     
+       
+        </video>
+        <video id='video7' width="100%" height="auto" autoplay="autoplay" loop preload="auto" class="hidden" onclick="myFunction7();" src="./7_video2animcycle.mp4"  type="video/mp4" >     
+      
+        </video>
+        <video id='video8' width="100%" height="auto" autoplay="autoplay"  preload="auto" class="hidden" src="./8_video3animend.mp4"  type="video/mp4"  >     
+         
+        </video>
+        <video id='video9' width="100%" height="auto" autoplay="autoplay" loop  preload="auto" class="hidden" onclick="myFunction9();" src="./9_video3cycle.mp4"  type="video/mp4" >     
+       
+        </video>
+
+        <video id='video10' width="100%" height="auto" autoplay="autoplay" preload="auto" class="hidden" src="./10_video4end.mp4"  type="video/mp4" >     
+            
+        </video>
+        <video id='video11' width="100%" height="auto" autoplay="autoplay" loop  preload="auto" class="hidden" onclick="myFunction11();" src="./11_video4сycle.mp4"  type="video/mp4" >     
+          
+        </video>
+         <video id='video12' width="100%" height="auto" autoplay="autoplay"  preload="auto" class="hidden" src="12_video5end.mp4"  type="video/mp4" >     
+          
+        </video>
+        <video id='video13' width="100%" height="auto" autoplay="autoplay" loop  preload="auto" class="hidden" onclick="myFunction13();" src="13_video5cycle.mp4"  type="video/mp4" >     
+        </video>     
+
+            <video id='video3_back'  width="100%" height="auto" autoplay="autoplay"  preload="auto" class="hidden" src="1_videointroanim_back.mp4"   type="video/mp4" onclick="myFunction1();" >  
+            </video>
+            <video id='video5_back'  width="100%" height="auto" autoplay="autoplay"  preload="auto" class="hidden" src="5_video2animcycle_back.mp4"   type="video/mp4" onclick="myFunction5();">  
+            </video>
+            <video id='video7_back'  width="100%" height="auto" autoplay="autoplay"  preload="auto" class="hidden" src="7_video2animcycle_back.mp4"   type="video/mp4" onclick="myFunction7();">  
+            </video>
+            <video id='video9_back'  width="100%" height="auto" autoplay="autoplay"  preload="auto" class="hidden" src="9_video3cycle_back.mp4"   type="video/mp4" onclick="myFunction9();">  
+            </video>
+         </div>
+    <script src="./my.js" >    
+
+    </script>     
+    </body>
+</html>
