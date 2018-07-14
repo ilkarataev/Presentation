@@ -44,6 +44,13 @@ function moveRect(e){
             break;
   }
 }
+video2.addEventListener('ended',aaa,false);
+function aaa(posittion) {
+var posittion;
+video3.play();
+video3.setAttribute('class', '');
+video2.setAttribute('class', 'hidden');
+}
 var Controller = {
   playSlide: function(posittion,oldpos) {
       
@@ -54,13 +61,14 @@ var Controller = {
         if(vids[posittion].getAttribute('loop')){
           vids[posittion].removeAttribute('loop');
           divload.setAttribute('class', '');  
-          vids[posittion].addEventListener('ended', Controller.glueSlide(posittion), false);  
+          vids[posittion].addEventListener('ended', function(){Controller.glueSlide(posittion)}, false);  
         }else{
         var psnext=posittion+1;
         vids[psnext].play();
         vids[psnext].setAttribute('class', 'active');  
         vids[posittion].setAttribute('class', 'hidden');    
-        vids[psnext].addEventListener('ended', function(){Controller.autoPlaySlide(psnext)}, false);
+        //vids[psnext].addEventListener('ended', function(){Controller.autoPlaySlide(psnext)}, false);
+        return posittion;
         
         }
       }else{   
@@ -74,30 +82,51 @@ var Controller = {
       }
 },
  glueSlide: function(posittion){
-        
-        var psnext=posittion+1;        
+         
+
+        var psnext=posittion+1;    
+
         divload.setAttribute('class', 'hidden');  
         vids[psnext].play();
         vids[psnext].setAttribute('class', 'active');  
         vids[posittion].setAttribute('class', 'hidden');    
        // Controller.autoPlaySlide(psnext);
        //Незнаю как удалить ебаный листнер
-        vids[psnext].addEventListener('ended', function(){Controller.autoPlaySlide(psnext)}, false); 
 
+        var funcDefiner = function(posittion) {
+                return function() {
+                        Controller.autoPlaySlide(posittion);
+                }
+        };
+
+        var eventFunc = funcDefiner(posittion, psnext);
+
+        vids[psnext].addEventListener('ended', eventFunc, false); 
+        vids[psnext].removeEventListener('ended', eventFunc, false); 
+        
+/*
+
+        vids[psnext].addEventListener('ended', func11(posittion,psnext), false); 
+        function func11(posittion,psnext){
+          Controller.autoPlaySlide(posittion)
+          return;
+          
+        }
+        vids[psnext].removeEventListener('ended', func11(posittion,psnext), false); 
+*/
        // vids[posittion].removeEventListener('ended', function(){Controller.glueSlide(posittion)}, false);
 
         
 
 },
-  autoPlaySlide: function(posittion,oldpos) {
-  vids[posittion].removeEventListener('ended', function(){Controller.glueSlide(posittion)}, false);
+  autoPlaySlide: function(posittion,oldpos) { 
 
   var psnext=posittion+1;
-  if(oldpos){
+  /*if(oldpos){
   vids[oldpos].removeEventListener('ended', Controller.autoPlaySlide(psnext,oldpos), false);  
   }else{
   vids[posittion].removeEventListener('ended', function(){Controller.autoPlaySlide(psnext)}, false);  
-  }  
+  }  */
   vids[psnext].play();
   vids[psnext].setAttribute('class', 'active');
   vids[posittion].setAttribute('class', 'hidden');
@@ -174,5 +203,7 @@ var Controller = {
 
   }
 };
+
+
 
                        
